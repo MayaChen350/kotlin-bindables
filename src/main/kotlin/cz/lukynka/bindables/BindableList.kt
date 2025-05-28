@@ -1,6 +1,6 @@
 package cz.lukynka.bindables
 
-class BindableList<T>(list: Collection<T>) {
+class BindableList<T>(list: List<T>) {
 
     constructor(vararg list: T): this(list.toList())
 
@@ -14,7 +14,7 @@ class BindableList<T>(list: Collection<T>) {
         list.toList().forEach(innerList::add)
     }
 
-    val values: Collection<T>
+    val values: List<T>
         get() = innerList.toList()
 
     val size: Int
@@ -24,6 +24,10 @@ class BindableList<T>(list: Collection<T>) {
         innerList.add(item)
         addListeners.toList().forEach { it.unit.invoke(BindableListItemAddEvent<T>(item)) }
         updateListeners.toList().forEach { it.unit.invoke() }
+    }
+
+    operator fun get(index: Int): T {
+        return innerList[index]
     }
 
     fun addIfNotPresent(item: T) {
