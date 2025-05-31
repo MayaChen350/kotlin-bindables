@@ -25,7 +25,7 @@ class BindablePool {
 
     fun <T> provideBindableList(default: Collection<T>?): BindableList<T> {
         val bindableList = BindableList<T>()
-        if(default != null) bindableList.addAll(default, true)
+        if (default != null) bindableList.addAll(default, true)
         bindableLists.add(bindableList)
         return bindableList
     }
@@ -36,7 +36,7 @@ class BindablePool {
 
     fun <K, V> provideBindableMap(map: Map<K, V>? = null): BindableMap<K, V> {
         val bindableMap = BindableMap<K, V>()
-        if(map != null) bindableMap.addAll(map, true)
+        if (map != null) bindableMap.addAll(map, true)
         bindableMaps.add(bindableMap)
         return bindableMap
     }
@@ -60,6 +60,8 @@ class BindablePool {
         bindableMaps.remove(bindableMap)
         bindableMap.dispose()
     }
+
+    val size: Int get() = bindableListeners.size + bindableLists.size + bindableMaps.size + bindables.size
 
     fun dispose() {
         bindables.forEach { bindable -> bindable.dispose() }

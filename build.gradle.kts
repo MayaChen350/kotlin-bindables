@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "cz.lukynka"
-version = "2.1"
+version = "2.2"
 
 repositories {
     mavenCentral()
